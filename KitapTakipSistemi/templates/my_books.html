@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitaplarım</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Eklediğim Kitaplar</h2>
+
+        <!-- 📌 Kategoriye Göre Filtreleme -->
+        <form method="post" action="{{ url_for('my_books') }}">
+            <label for="kategori">Kategoriye Göre Filtrele:</label>
+            <select id="kategori" name="kategori" onchange="this.form.submit()">
+                <option value="">Tümü</option>
+                {% for kategori in kategoriler %}
+                    <option value="{{ kategori }}" {% if kategori == secili_kategori %}selected{% endif %}>
+                        {{ kategori }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+
+        <!-- 📌 Kitap Listesi -->
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Yazar</th>
+                    <th>Kitap Adı</th>
+                    <th>Bulunduğu Yer</th>
+                    <th>Kategori</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.author_name }}</td>
+                    <td>{{ book.book_name }}</td>
+                    <td>{{ book.location }}</td>
+                    <td>{{ book.kategori }}</td>
+                    <td>
+                        <a class="delete-link" href="{{ url_for('delete_book', book_id=book.id) }}" onclick="return confirm('Bu kitabı silmek istediğine emin misin?')">❌ Sil</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <a class="back-button" href="{{ url_for('dashboard') }}">🔙 Geri Dön</a>
+    </div>
+</body>
+</html>

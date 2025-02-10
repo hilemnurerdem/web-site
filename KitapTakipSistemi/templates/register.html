@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kayıt Ol</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .register-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Sayfanın ortasına hizalar */
+        }
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .register-form input {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .register-form button {
+            background: #4A148C;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .register-form button:hover {
+            background: #6A1B9A;
+        }
+        .login-link {
+            margin-top: 10px;
+        }
+        .login-link a {
+            text-decoration: none;
+            color: #4A148C;
+            font-weight: bold;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Kayıt Ol</h2>
+        <form class="register-form" method="post">
+            <input type="text" name="first_name" placeholder="Adınız" required>
+            <input type="text" name="last_name" placeholder="Soyadınız" required>
+            <input type="email" name="email" placeholder="E-Posta Adresiniz" required>
+            <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+            <input type="password" name="password" placeholder="Şifre" required>
+            <input type="password" name="confirm_password" placeholder="Şifre Tekrar" required>
+            <button type="submit">Kayıt Ol</button>
+        </form>
+        <div class="login-link">
+            <a href="{{ url_for('login') }}">🔑 Giriş Yap</a>
+        </div>
+    </div>
+</body>
+</html>
