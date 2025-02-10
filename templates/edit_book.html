@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitap Düzenle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Kitap Düzenle</h2>
+        <form method="post">
+            <label for="author_name">Yazar:</label>
+            <input type="text" id="author_name" name="author_name" value="{{ book['author_name'] }}" required>
+
+            <label for="book_name">Kitap Adı:</label>
+            <input type="text" id="book_name" name="book_name" value="{{ book['book_name'] }}" required>
+
+            <label for="location">Bulunduğu Yer:</label>
+            <input type="text" id="location" name="location" value="{{ book['location'] }}" required>
+
+            <label for="kategori">Kategori:</label>
+            <select id="kategori" name="kategori">
+                {% for kategori in ["Korku", "Macera", "Bilim Kurgu", "Romantik", "Biyografi", "Anı", "Hikaye", "Çizgi Roman"] %}
+                    <option value="{{ kategori }}" {% if book['kategori'] == kategori %}selected{% endif %}>
+                        {{ kategori }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Kaydet</button>
+        </form action="{{ url_for('add_book') }}" method="post">
+        <a href="{{ url_for('edit_books') }}">🔙 Geri Dön</a>
+    </div>
+</body>
+</html>
